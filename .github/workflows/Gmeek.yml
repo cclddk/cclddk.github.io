@@ -1,4 +1,4 @@
-name: build Dr.C
+name: build Gmeek
 
 on:
   workflow_dispatch:
