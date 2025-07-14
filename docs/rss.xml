@@ -1,5 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Dr.Chen的Blog</title><link>https://cclddk.github.io</link><description>技术DIY &amp; 杂谈 &amp; 小破站：80082088er0</description><copyright>Dr.Chen的Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/121612625?v=4</url><title>avatar</title><link>https://cclddk.github.io</link></image><lastBuildDate>Tue, 08 Jul 2025 11:16:59 +0000</lastBuildDate><managingEditor>Dr.Chen的Blog</managingEditor><ttl>60</ttl><webMaster>Dr.Chen的Blog</webMaster><item><title>Publications List</title><link>https://cclddk.github.io/post/Publications%20List.html</link><description>&lt;html xmlns:o='urn:schemas-microsoft-com:office:office'
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Dr.Chen的Blog</title><link>https://cclddk.github.io</link><description>技术DIY &amp; 杂谈 &amp; 小破站：80082088er0</description><copyright>Dr.Chen的Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/121612625?v=4</url><title>avatar</title><link>https://cclddk.github.io</link></image><lastBuildDate>Mon, 14 Jul 2025 02:13:48 +0000</lastBuildDate><managingEditor>Dr.Chen的Blog</managingEditor><ttl>60</ttl><webMaster>Dr.Chen的Blog</webMaster><item><title>FFB方向盘报错-编码器校准失败-待续。。。</title><link>https://cclddk.github.io/post/FFB-fang-xiang-pan-bao-cuo---bian-ma-qi-xiao-zhun-shi-bai---dai-xu-%E3%80%82%E3%80%82%E3%80%82.html</link><description>描述：
+
+硬件：[tinybox的FFB主板](https://www.bilibili.com/video/BV16x4y1E7Rp/)，[日鼎130ST](https://item.taobao.com/item.htm?abbucket=19&amp;detail_redpacket_pop=true&amp;id=822527432183&amp;ltk2=1752458532071po55jek9bpb1sl4zrzj0qh&amp;ns=1&amp;priceTId=undefined&amp;query=%E6%97%A5%E9%BC%8E%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA&amp;skuId=5753980093427&amp;spm=a21n57.1.hoverItem.3&amp;utparam=%7B%22aplus_abtest%22%3A%22c3644bad980e884ace4d98b55c45da77%22%7D&amp;xxc=taobaoSearch) 
+
+现象：上电校准后，软件弹出报错“编码器校准失败”，如下
+
+![Image](https://github.com/user-attachments/assets/49382b5c-80f9-4bb0-97a2-6647f6121f6e)
+
+分析排查：感谢群友的热心帮助
+
+1. 上电顺序导致，经排查后排除&lt;img width='345' height='390' alt='Image' src='https://github.com/user-attachments/assets/c466b973-2f79-4287-bd24-6c2acf6ee80f' /&gt;
+2. 新旧固件，擦除重写，未解决
+3. 编码器接线，挂锡压实，未解决
+![Image](https://github.com/user-attachments/assets/b9967223-58ec-4fd8-ac34-249b75aeeaa9)
+
+4. 怀疑编码器出现故障，但不排除ffb主板的问题，遂将主板返厂给tinybox帮忙测试，待排查后决定是否更换编码器
+5. 待续。</description><guid isPermaLink="true">https://cclddk.github.io/post/FFB-fang-xiang-pan-bao-cuo---bian-ma-qi-xiao-zhun-shi-bai---dai-xu-%E3%80%82%E3%80%82%E3%80%82.html</guid><pubDate>Mon, 14 Jul 2025 02:13:24 +0000</pubDate></item><item><title>Publications List</title><link>https://cclddk.github.io/post/Publications%20List.html</link><description>&lt;html xmlns:o='urn:schemas-microsoft-com:office:office'
 xmlns:w='urn:schemas-microsoft-com:office:word'
 xmlns:m='http://schemas.microsoft.com/office/2004/12/omml'
 xmlns='http://www.w3.org/TR/REC-html40'&gt;
