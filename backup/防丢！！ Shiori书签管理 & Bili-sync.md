@@ -21,3 +21,27 @@ Win系统的docker直接拉取镜像，运行时只需配置页面存储位置�
 ps：报错数据库锁定时，按下面方法解决即可！
 
 <img width="929" height="324" alt="Image" src="https://github.com/user-attachments/assets/22dcc9ce-5ff1-48a0-af85-b917f4061c62" />
+
+services:
+  bili-sync-rs:
+    # 不推荐使用 latest 这种模糊的 tag，最好直接指明版本号
+    image: amtoaer/bili-sync-rs:latest
+    restart: unless-stopped
+    network_mode: bridge
+    # 该选项请仅在日志终端支持彩色输出时启用，否则日志中可能会出现乱码
+    tty: true
+    # 非必需设置项，推荐设置为宿主机用户的 uid 及 gid (`$uid:$gid`)
+    # 可以执行 `id ${user}` 获取 `user` 用户的 uid 及 gid
+    # 程序下载的所有文件权限将与此处的用户保持一致，不设置默认为 Root
+    user: 1000:1000
+    hostname: bili-sync-rs
+    container_name: bili-sync-rs
+    # 程序默认绑定 0.0.0.0:12345 运行 http 服务
+    # 可同时修改 compose 文件与 config.toml 变更服务运行的端口
+    ports:
+      - 12345:12345
+    volumes:
+      - H:/docker/bilibili/config:/app/.config/bili-sync  # 配置文件路径
+      - H:/docker/bilibili/media:/videos  # 视频存储路径
+    logging:
+      driver: "local"

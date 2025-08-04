@@ -84,7 +84,30 @@ Win系统的docker直接拉取镜像，运行时只需配置页面存储位置�
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/f36d88bd-06fd-48c2-90e4-74b48631a22a"><img width="2000" height="1213" alt="Image" src="https://github.com/user-attachments/assets/f36d88bd-06fd-48c2-90e4-74b48631a22a" style="max-width: 100%; height: auto; max-height: 1213px;"></a></p>
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/cf815787-400f-4571-8927-57ba9790bea8"><img width="2000" height="1189" alt="Image" src="https://github.com/user-attachments/assets/cf815787-400f-4571-8927-57ba9790bea8" style="max-width: 100%; height: auto; max-height: 1189px;"></a>本地打开后有弹幕，好评一下！要是也能缓存评论区就好了</p>
 <p>ps：报错数据库锁定时，按下面方法解决即可！</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/22dcc9ce-5ff1-48a0-af85-b917f4061c62"><img width="929" height="324" alt="Image" src="https://github.com/user-attachments/assets/22dcc9ce-5ff1-48a0-af85-b917f4061c62" style="max-width: 100%; height: auto; max-height: 324px;"></a></p></div>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/22dcc9ce-5ff1-48a0-af85-b917f4061c62"><img width="929" height="324" alt="Image" src="https://github.com/user-attachments/assets/22dcc9ce-5ff1-48a0-af85-b917f4061c62" style="max-width: 100%; height: auto; max-height: 324px;"></a></p>
+<p>services:<br>
+bili-sync-rs:<br>
+# 不推荐使用 latest 这种模糊的 tag，最好直接指明版本号<br>
+image: amtoaer/bili-sync-rs:latest<br>
+restart: unless-stopped<br>
+network_mode: bridge<br>
+# 该选项请仅在日志终端支持彩色输出时启用，否则日志中可能会出现乱码<br>
+tty: true<br>
+# 非必需设置项，推荐设置为宿主机用户的 uid 及 gid (<code class="notranslate">$uid:$gid</code>)<br>
+# 可以执行 <code class="notranslate">id ${user}</code> 获取 <code class="notranslate">user</code> 用户的 uid 及 gid<br>
+# 程序下载的所有文件权限将与此处的用户保持一致，不设置默认为 Root<br>
+user: 1000:1000<br>
+hostname: bili-sync-rs<br>
+container_name: bili-sync-rs<br>
+# 程序默认绑定 0.0.0.0:12345 运行 http 服务<br>
+# 可同时修改 compose 文件与 config.toml 变更服务运行的端口<br>
+ports:<br>
+- 12345:12345<br>
+volumes:<br>
+- H:/docker/bilibili/config:/app/.config/bili-sync  # 配置文件路径<br>
+- H:/docker/bilibili/media:/videos  # 视频存储路径<br>
+logging:<br>
+driver: "local"</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
@@ -143,7 +166,11 @@ console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
 document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
-
+cmButton=document.getElementById("cmButton");
+    span=document.createElement("span");
+    span.setAttribute("class","Counter");
+    span.innerHTML="1";
+    cmButton.appendChild(span);
 
 
 function openComments(){
