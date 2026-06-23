@@ -1,0 +1,72 @@
+name: Update TrendRadar666
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trendradar-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout website repository
+        uses: actions/checkout@v4
+        with:
+          path: site
+          fetch-depth: 0
+
+      - name: Checkout crawler source
+        uses: actions/checkout@v4
+        with:
+          repository: cclddk/TrendRadar666-source
+          ref: master
+          path: source
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install crawler dependencies
+        working-directory: source
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run crawler
+        working-directory: source
+        env:
+          GITHUB_ACTIONS: true
+        run: python main.py
+
+      - name: Copy generated site
+        run: |
+          mkdir -p site/TrendRadar666
+          cp source/index.html site/TrendRadar666/index.html
+          rm -rf site/TrendRadar666/output
+          if [ -d source/output ]; then
+            cp -R source/output site/TrendRadar666/output
+          fi
+          touch site/.nojekyll
+          touch site/TrendRadar666/.nojekyll
+
+      - name: Commit refreshed page
+        working-directory: site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add TrendRadar666 .nojekyll
+          if git diff --cached --quiet; then
+            echo "No page changes to publish."
+          else
+            git commit -m "Update TrendRadar666 page"
+            git push
+          fi
