@@ -2,20 +2,25 @@ name: Update TrendRadar666
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "17 */4 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: trendradar-update
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  update:
+  update-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - name: Checkout website repository
         uses: actions/checkout@v4
@@ -65,8 +70,20 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add TrendRadar666 .nojekyll
           if git diff --cached --quiet; then
-            echo "No page changes to publish."
+            echo "No page changes to commit."
           else
             git commit -m "Update TrendRadar666 page"
             git push
           fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
